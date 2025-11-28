@@ -2,12 +2,10 @@ FROM python:3.9-slim
 
 WORKDIR /app
 
-# 复制并安装依赖
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+# --- 核心修改：直接在这里安装，不依赖 requirements.txt 文件 ---
+RUN pip install --no-cache-dir python-telegram-bot volcengine-python-sdk
+# -------------------------------------------------------
 
-# 复制主代码
 COPY bot.py .
 
-# 启动命令
 CMD ["python", "bot.py"]
